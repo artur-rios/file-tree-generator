@@ -222,7 +222,7 @@ export function Editor() {
       })
       .catch((error) => {
         console.error('Error:', error);
-        alert('깃허브로 부터 정보를 불러오는데 실패하였습니다.');
+        alert('Could not fetch file tree from the URL provided');
       });
   }
 
