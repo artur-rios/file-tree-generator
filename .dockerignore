@@ -1,0 +1,7 @@
+# Kept out of the image's build context: the build installs its own dependencies (npm ci) and makes its own build/.
+.git
+node_modules
+build
+.idea
+*.log
+.env*
