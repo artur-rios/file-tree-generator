@@ -2,7 +2,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --no-eslintrc --config ci/eslintrc.json --report-unused-disable-directives src && tsc --noEmit"
   },
   "dependencies": {
     "@types/clipboard": "^2.0.7",

@@ -1,0 +1,19 @@
+# What Jenkins checks for this repository, read by the pipeline of the yggdrasil installation that deploys it
+# (yggdrasil's docs/catalog.md, "Repository pipeline file", has every field). It is data, never code: images (pinned
+# by version and digest, which Renovate keeps up to date: the owner merges those changes), commands, globs and the
+# names of Jenkins credentials. The commands are scripts under ci/ that run from the repository's root, so you can run
+# them on your own machine too. The site is the application file-tree-generator: main deploys production (its
+# Dockerfile builds the image).
+#
+# Check it where the catalog is, in the yggdrasil checkout:
+#   python3 scripts/pipeline_config.py describe file-tree-generator <this repository's checkout>
+
+checks:
+  lint: # npm ci, then the lint script (eslint with Create React App's react-app rules, and tsc), in the Dockerfile's Node
+    image: node:24.22.1-alpine3.24@sha256:06d7adf3e0ef61a13f1d28682726366f97a15aa1888c934d3ecec86c33918b53
+    run: ci/lint.sh
+
+  build: # the Dockerfile's image, built as a deploy builds it (build only, no push), then removed
+    image: docker:29.9.2-cli@sha256:5e6baf67325a79f64ed3bed6863954d5e05d0f3d4e57cbdb14809346814bbfdb
+    run: ci/build.sh
+    docker: true # docker build, on the CI engine
